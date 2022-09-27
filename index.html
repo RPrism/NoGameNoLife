@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开场</title>
+    <style>
+        /* 进入时缩小 */
+        @keyframes body {
+            0% {
+                transform: scale(2);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+        body {
+            background-color: #222;
+            text-align: center;
+            animation-name: body;
+            animation-duration: 2s;
+			text-align: center;
+            margin-top: 20%;
+            overflow: hidden;
+        }
+
+        @keyframes zhuan{
+            0% {
+				transform: rotate(0deg);
+		    }
+            80% {
+				transform: rotate(180deg);
+            }
+		    100% {
+				transform: rotate(180deg);
+		    }
+        }
+        .zhuan {
+            animation-name: zhuan;
+            animation-duration: 0.8s;
+        }
+
+        @keyframes kuosan{
+            0% {
+                padding: 0;
+                opacity: 1;
+            }
+
+            100% {
+                padding: 0 100px 0 100px;
+                opacity: 0.0;
+            }
+        }
+        .kuosan {
+            animation-name: kuosan;
+            animation-duration: 0.6s;
+
+        }
+
+        .div {
+            text-shadow:
+                0 0 3px rgb(255, 0, 157),
+                0 0 6px rgb(255, 0, 157),
+                0 0 9px rgb(255, 0, 157);
+            color: aliceblue;
+            font-size: 28px;
+            opacity: 1.0;
+            line-height: 50px;
+        }
+
+        .l,.r {
+            font-size: 45px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="div" id="app">
+        <span class="l">「</span>
+        <span id="text">测试</span>
+        <span class="r">」</span>
+    </div>
+
+
+<script>
+var text = '1.这个世界禁止一切的杀伤、战争与掠夺。<br/>2.所有纠纷一律通过在游戏中决一胜负来解决。<br/>3.游戏中须赌上双方皆认为对等的赌注。<br/>4.在不违反第三条的情况下，游戏内容、赌注皆不受限制。<br/>5.受挑战的一方有权决定游戏内容。<br/>6.“向盟约宣誓”所打的赌绝对要遵守。<br/>7.集团纠纷应指定全权代理人。<br/>8.游戏当中有不正当行为者，一旦败露就视同败北。<br/>9.以神之名宣布，以上各条皆为不变的规则。<br/>10.大家一起开心地玩吧!';
+
+for(let i=0; i<=text.length; i++){
+    setTimeout(()=>{
+        // 从左开始
+        if(this.text.substr(0,1) == "<"){
+            //遇到尖括号直接擦除后面四位
+            this.text = this.text.substr(5,this.text.length);
+        }else{
+            this.text = this.text.substr(1,this.text.length);
+        }
+
+        // 从右开始
+        if(this.text.substr(this.text.length-1,5) == ">"){
+            //遇到尖括号直接擦除后面四位
+            this.text = this.text.substr(0,this.text.length-4);
+        }else{
+            this.text = this.text.substr(0,this.text.length);
+        }
+
+        this.text = this.text.substr(0,this.text.length-1);
+        document.getElementById("text").innerHTML=this.text;
+        if(this.text == ''){
+            document.getElementById("app").classList.add("zhuan");
+            setTimeout(()=>{
+                //让中心文本向外扩散
+                document.getElementById("text").classList.add("kuosan");
+                //逐渐隐形
+                document.getElementById("app").classList.add("kuosan");
+                //彻底隐形
+                document.getElementById("app").style.opacity=0;
+            },800);
+        }
+    },30*i)
+}
+
+</script>
+</body>
+</html>
